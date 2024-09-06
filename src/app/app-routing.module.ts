@@ -1,8 +1,32 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-
-const routes: Routes = [];
+import { TasksComponent } from './components/tasks/tasks.component';
+import { PrivateTasksComponent } from './components/private-tasks/private-tasks.component';
+import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { AuthGuard } from './auth.guard';
+//las rutas en angular
+const routes: Routes = [
+  {
+    path: '', //ruta inicial
+    redirectTo: '/tasks', //redicciona
+    pathMatch: 'full'
+  }, {
+    path: 'tasks',
+    component: TasksComponent
+  },
+  {
+    path: 'private',
+    component: PrivateTasksComponent,
+    canActivate: [AuthGuard]
+  }, {
+    path: 'signup',
+    component: SignupComponent
+  },
+  {
+    path: 'signin',
+    component: SigninComponent
+  }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
